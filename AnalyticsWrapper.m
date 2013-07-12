@@ -33,7 +33,6 @@
 #ifdef CONST_FLURRY_SESSION_ID
     // Flurry Analytics!
     [Flurry startSession:CONST_FLURRY_SESSION_ID];
-    [Flurry setUserID:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]];
 #endif
     
 #ifdef CONST_GOOGLE_ANALYTICS_ID
@@ -124,7 +123,8 @@
         return;
     }
     
-    // TODO:[sebos]
+    // TODO:[sebos] as far as I investigate I can't log payments with google analytics with many currencies so
+    // I am still thinking how to solve it
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
