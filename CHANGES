@@ -1,0 +1,2 @@
+Version 1.0
+- added basic support for Flurry Analytics, Google Analytics and TestFlight (with remote logging)
