@@ -4,9 +4,9 @@ Analytics Wrapper should in a way help you quickly add few (from many that are g
 
 Installation
 =================
-It's very easy - just add <tt>AnalyticsWrapper</tt> & <tt>ViewControllerWrapper</tt> to your project. After that you are just few changes away form complete, so:
+It's very easy - just add all files (<tt>AnalyticsWrapper</tt> & <tt>ViewControllerWrapper</tt> classes & <tt>AnalyticsHeader</tt>) to your project. After that you are just few changes away form complete, so:
 
-- in <tt>AnalyticsWrapper.h</tt> uncomment and set the proper ID for services you want to use
+- in <tt>AnalyticsHeader.h</tt> uncomment and set the proper IDs for services you want to use
 - <tt>CONST_DISABLE_ANALYTICS</tt> is a bool which determines if any analytics should gather data, basically keep it <tt>YES</tt> on non-production builds
 - if you are using Google Analytics then all your View Controllers should inherit from <tt>ViewControllerWrapper</tt>  instead of <tt> UIViewController</tt> , thanks to that you won't have to set name for each view - I have a habit of naming controllers with "VC" at the end so there is appropriate code in the class to remove this (change this according to your needs) and made the name more human ;)
 - go to your .pch file and add:
@@ -46,19 +46,19 @@ Other possibilities:
 ```objective-c
 [AnalyticsWrapper setUserLocation:location]; // a CLLocation object
 ```
-- Log timed events (Flurry enabled logging timed events but you have to point out start and stop for each view) -- I'll probably add this to <tt>ViewControllerWrapper</tt> in next version
+- Log timed events (Flurry enabled logging timed events but you have to point out start and stop for each view) -- this is already added to <tt>ViewControllerWrapper</tt> for tracking view in FLurry but you can use this to know more about other events
 
 ```objective-c
-// in viewDidAppear
-[AnalyticsWrapper logEvent:@"Menu" timed:YES];
+// when event starts
+[AnalyticsWrapper logEvent:@"Time spent on map" timed:YES];
 
-// in viewWillDisappear
-[AnalyticsWrapper endTimedEvent:@"Menu"];
+// at the end
+[AnalyticsWrapper endTimedEvent:@"Time spent on map"];
 ```
 - Log exception (besides those - unhandled ones will be captured by Flurry)
 
 ```objective-c
-[AnalyticsWrapper trackExceptionWithDescription:@"User is stupid! :)" fatal:YES];
+[AnalyticsWrapper trackExceptionWithDescription:@"User made stupid mistake and I didn't anticipate that! :(" fatal:YES];
 ```
 
 Requirements

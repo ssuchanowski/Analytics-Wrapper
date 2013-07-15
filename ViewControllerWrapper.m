@@ -1,6 +1,5 @@
 //
 //  ViewControllerWrapper.m
-//  Tenerife Bay
 //
 //  Created by Sebastian Suchanowski on 7/12/13.
 //  Copyright (c) 2013 Synappse Sebastian Suchanowski. All rights reserved.
@@ -14,7 +13,14 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    self.trackedViewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:@"VC" withString:@""];
+    NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
+    self.trackedViewName = viewName;
+    [AnalyticsWrapper logEvent:viewName timed:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
+    [AnalyticsWrapper endTimedEvent:viewName];
 }
 
 @end

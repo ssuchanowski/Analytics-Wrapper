@@ -1,2 +1,6 @@
+Version 1.0.1
+- added code to ViewControllerWrapper which automates tracking view controllers as timed events
+- move all constant to new header file so there won't be neeed of resolving conflicts in case of update
+
 Version 1.0
 - added basic support for Flurry Analytics, Google Analytics and TestFlight (with remote logging)
