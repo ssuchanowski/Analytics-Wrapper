@@ -10,6 +10,7 @@
 @interface AnalyticsWrapper : NSObject
 
 + (void)setup;
++ (BOOL)shouldLogInfo;
 + (void)setUserAge:(int)age;
 + (void)setUserLocation:(CLLocation *)location;
 + (void)setUserSex:(BOOL)isMale;

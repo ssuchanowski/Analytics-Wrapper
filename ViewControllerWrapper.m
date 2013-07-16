@@ -13,14 +13,18 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
-    self.trackedViewName = viewName;
-    [AnalyticsWrapper logEvent:viewName timed:YES];
+    if ([AnalyticsWrapper shouldLogInfo]) {
+        NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
+        self.trackedViewName = viewName;
+        [AnalyticsWrapper logEvent:viewName timed:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
-    [AnalyticsWrapper endTimedEvent:viewName];
+    if ([AnalyticsWrapper shouldLogInfo]) {
+        NSString *viewName = [NSStringFromClass([self class]) stringByReplacingOccurrencesOfString:CONST_VC_CLASS_NAME_POSTFIX withString:@""];
+        [AnalyticsWrapper endTimedEvent:viewName];
+    }
 }
 
 @end
